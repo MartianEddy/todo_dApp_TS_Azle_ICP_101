@@ -1,0 +1,30 @@
+type Task = record {
+  id : text;
+  title : text;
+  createdAt : nat64;
+  completed : bool;
+  description : text;
+  updatedAt : opt nat64;
+};
+type TaskPayload = record {
+  title : text;
+  completed : bool;
+  description : text;
+};
+type _AzleResult = variant { Ok : Task; Err : text };
+type _AzleResult_1 = variant { Ok : vec Task; Err : text };
+type _AzleResult_2 = variant { Ok : text; Err : text };
+type _AzleResult_3 = variant { Ok : float64; Err : text };
+service : () -> {
+  addTask : (TaskPayload) -> (_AzleResult);
+  archiveCompletedTasks : () -> (_AzleResult_1);
+  clearAllTasks : () -> (_AzleResult_2);
+  completeTask : (text) -> (_AzleResult);
+  countTotalTasks : () -> (_AzleResult_3) query;
+  deleteTask : (text) -> (_AzleResult);
+  getTask : (text) -> (_AzleResult) query;
+  getTasks : () -> (_AzleResult_1) query;
+  listCompletedTasks : () -> (_AzleResult_1) query;
+  listIncompleteTasks : () -> (_AzleResult_1) query;
+  updateTask : (text, TaskPayload) -> (_AzleResult);
+}
